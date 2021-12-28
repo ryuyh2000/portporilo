@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { GitAPI } from "./GitAPI";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -54,8 +55,10 @@ const Topic = styled.div`
   }
 `;
 
-const Element = styled.li`
+const Element = styled.div`
   margin-top: 10px;
+  color: white;
+  transition: all ease 0.5s;
   &:hover {
     color: #00ffd5;
   }
@@ -66,8 +69,6 @@ interface APIData {
   name: string;
 }
 
-let GitRepoList: string[] = [];
-
 const Menu = () => {
   const [click, getClick] = React.useState(false);
   const [menu, getClickMenu] = React.useState(false);
@@ -75,6 +76,7 @@ const Menu = () => {
 
   const getRepo = async () => {
     try {
+      let GitRepoList: string[] = [];
       const res = await GitAPI.getAllRepo();
       res.data.map((result: APIData) => {
         GitRepoList.push(result.name);
@@ -102,18 +104,25 @@ const Menu = () => {
 
       <Manual show={menu}>
         <ul>
-          <li className="topic">
+          <div className="topic">
             <Topic>Github</Topic>
-            {data.map((name: string, index: number) => (
-              <Element key={index}>{name}</Element>
+            {data.map((name: string, index) => (
+              <Link
+                key={index}
+                style={{ textDecorationLine: "none" }}
+                to={`/github/${name}`}
+                state={{ repo: name }}
+              >
+                <Element>{name}</Element>
+              </Link>
             ))}
-          </li>
-          <li className="topic">
+          </div>
+          <div className="topic">
             <Topic>Study</Topic>
             <Element key={1}>React</Element>
             <Element key={2}>JavaScript</Element>
             <Element key={3}>TypeScript</Element>
-          </li>
+          </div>
         </ul>
       </Manual>
     </Container>
