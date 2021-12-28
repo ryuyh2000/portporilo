@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Menu from "./Menu";
 import img1 from "./img/1.png";
 import img2 from "./img/2.png";
 import img3 from "./img/3.png";
@@ -67,7 +66,6 @@ function Home() {
 
   return (
     <>
-      <Menu />
       <Constainer>
         <Box1>
           <Logo index={center}>

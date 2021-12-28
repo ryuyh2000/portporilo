@@ -6,4 +6,5 @@ const api = axios.create({
 
 export const GitAPI = {
   getAllRepo: () => api.get("users/ryuyh2000/repos"),
+  getRepoData: (repo: string) => api.get(`/repos/ryuyh2000/${repo}/commits`),
 };
