@@ -26,11 +26,9 @@ const Manual = styled.div<{ show: boolean }>`
   background-color: #28323c;
   opacity: 0.8;
   color: white;
-  transition: all ease 0.5s;
-  transform: scale(1);
   ${(props) =>
     props.show
-      ? "display:relative; z-index: 1; left:100px; position: fixed; "
+      ? "display:relative; z-index: 1; left:100px; position: fixed;"
       : "display:none"};
   ul {
     margin: 0px 0px 20px 0px;
