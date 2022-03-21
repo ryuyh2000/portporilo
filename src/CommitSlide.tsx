@@ -18,6 +18,13 @@ const LangImg = styled.img`
   height: 200px;
 `;
 
+const HoverDiv = styled.div`
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 40%;
+`;
+
 const CommitSlide = () => {
   const [imageSrc, setImageSrc] = React.useState(javaS);
   const [velogHref, setVelogHref] = React.useState("javascript");
@@ -41,18 +48,20 @@ const CommitSlide = () => {
 
   return (
     <>
-      <a href={`https://velog.io/@ryuyh2000?tag=${velogHref}`}>
-        <LangImg
-          onMouseOver={() => {
-            setMouseHover(true);
-          }}
-          onMouseOut={() => {
-            setMouseHover(false);
-          }}
-          src={imageSrc}
-        />
-      </a>
-      {mouseHover ? <>asdfasdfasdf</> : <>asdf</>}
+      <div
+        onMouseOver={() => {
+          setMouseHover(true);
+        }}
+        onMouseOut={() => {
+          setMouseHover(false);
+        }}
+      >
+        <a href={`https://velog.io/@ryuyh2000?tag=${velogHref}`}>
+          <LangImg src={imageSrc} />
+        </a>
+      </div>
+
+      {mouseHover && <HoverDiv>{velogHref}</HoverDiv>}
     </>
   );
 };
