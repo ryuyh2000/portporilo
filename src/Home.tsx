@@ -18,13 +18,12 @@ const Box1 = styled.div`
 `;
 
 function Home() {
-  React.useEffect(() => {}, []);
-
   return (
     <>
-      <CommitSlide />
       <Constainer>
-        <Box1></Box1>
+        <Box1>
+          <CommitSlide />
+        </Box1>
       </Constainer>
     </>
   );

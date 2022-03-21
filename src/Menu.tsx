@@ -15,7 +15,7 @@ const Bar = styled.div<{ click: boolean }>`
   font-size: 50px;
   transition: all ease 0.5s;
   transform: ${(props) =>
-    props.click == true ? "rotate(45deg)" : "rotate(0deg)"};
+    props.click === true ? "rotate(45deg)" : "rotate(0deg)"};
   margin-left: 20px;
 `;
 
@@ -63,6 +63,14 @@ const Element = styled.div`
   border-bottom: 1px solid gray;
 `;
 
+const MainDisplay = styled(Link)`
+  position: absolute;
+  transform: translateX(-120%);
+  left: 100%;
+  color: white;
+  text-decoration-line: none;
+`;
+
 interface APIData {
   name: string;
 }
@@ -76,9 +84,7 @@ const Menu = () => {
     try {
       let GitRepoList: string[] = [];
       const res = await GitAPI.getAllRepo();
-      res.data.map((result: APIData) => {
-        GitRepoList.push(result.name);
-      });
+      res.data.map((result: APIData) => GitRepoList.push(result.name));
       getData(GitRepoList);
     } catch (e) {
       console.log(e);
@@ -117,12 +123,25 @@ const Menu = () => {
           </div>
           <div className="topic">
             <Topic>Study</Topic>
-            <Element key={1}>React</Element>
-            <Element key={2}>JavaScript</Element>
-            <Element key={3}>TypeScript</Element>
+            <a href="https://velog.io/@ryuyh2000?tag=React">
+              <Element>React</Element>
+            </a>
+            <a href="https://velog.io/@ryuyh2000?tag=JavaScript">
+              <Element>JavaScript</Element>
+            </a>
+            <a href="https://velog.io/@ryuyh2000?tag=TypeScript">
+              <Element>TypeScript</Element>
+            </a>
+            <a href="https://velog.io/@ryuyh2000/series/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">
+              <Element>Personal Project</Element>
+            </a>
           </div>
         </ul>
       </Manual>
+
+      <MainDisplay to="/">
+        <Element>Home</Element>
+      </MainDisplay>
     </Container>
   );
 };
