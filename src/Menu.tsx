@@ -75,25 +75,30 @@ interface APIData {
   name: string;
 }
 
-const Menu = () => {
-  const [click, getClick] = React.useState(false);
-  const [menu, getClickMenu] = React.useState(false);
-  const [data, getData] = React.useState<string[]>([]);
+const Menu = ({}) => {
+  const [click, setClick] = React.useState(false);
+  const [menu, setClickMenu] = React.useState(false);
+  const [data, setData] = React.useState<string[]>([]);
 
   const getRepo = async () => {
     try {
       let GitRepoList: string[] = [];
       const res = await GitAPI.getAllRepo();
       res.data.map((result: APIData) => GitRepoList.push(result.name));
-      getData(GitRepoList);
+      setData(GitRepoList);
     } catch (e) {
       console.log(e);
     }
   };
 
   const onClick = () => {
-    getClick(!click);
-    getClickMenu(!menu);
+    setClick(!click);
+    setClickMenu(!menu);
+  };
+
+  const eleClick = () => {
+    setClick(false);
+    setClickMenu(false);
   };
 
   React.useEffect(() => {
@@ -117,23 +122,23 @@ const Menu = () => {
                 to={`/github/${name}`}
                 state={{ repo: name }}
               >
-                <Element>{name}</Element>
+                <Element onClick={eleClick}>{name}</Element>
               </Link>
             ))}
           </div>
           <div className="topic">
             <Topic>Study</Topic>
             <a href="https://velog.io/@ryuyh2000?tag=React">
-              <Element>React</Element>
+              <Element onClick={eleClick}>React</Element>
             </a>
             <a href="https://velog.io/@ryuyh2000?tag=JavaScript">
-              <Element>JavaScript</Element>
+              <Element onClick={eleClick}>JavaScript</Element>
             </a>
             <a href="https://velog.io/@ryuyh2000?tag=TypeScript">
-              <Element>TypeScript</Element>
+              <Element onClick={eleClick}>TypeScript</Element>
             </a>
             <a href="https://velog.io/@ryuyh2000/series/%EA%B0%9C%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">
-              <Element>Personal Project</Element>
+              <Element onClick={eleClick}>Personal Project</Element>
             </a>
           </div>
         </ul>
